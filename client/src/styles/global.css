@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #cd2e71;
+  --white-color: #e8e8e8;
+  --bg-color: #000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.navbar {
+  padding: 0.5rem 100px;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-color);
+  height: 80px;
+}
+
+.icon {
+  height: 44.27px;
+  width: 159px;
+}
+
+.btn {
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn.btn-login {
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  width: 100px;
+  height: 40px;
+  font-weight: 800;
+  margin-right: 1rem;
+}
+
+.btn-login:hover {
+  border: 1px solid var(--white-color);
+}
+
+.btn.btn-register {
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  width: 100px;
+  height: 40px;
+  font-weight: 900;
+}
