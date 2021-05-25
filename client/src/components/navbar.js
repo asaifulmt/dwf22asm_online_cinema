@@ -27,17 +27,17 @@ const NavbarComponent = () => {
         <Nav className="ml-auto">
         {
           isLogin ? (
-            <NavDropdown title={(<img src="/profile-navbar.svg" alt="profile" />)}>
+            <NavDropdown title={(<img src="/profile.svg" alt="profile" />)}>
               <NavDropdown.Item onClick={() => goTo('/profile')}>
                 <div className="d-flex align-items-center">
                   <img src="/user.svg" alt="user" height="20px" className="mr-2" />
                   <b>Profile</b>
                 </div>
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => goTo('/raise-fund')}>
+              <NavDropdown.Item onClick={() => goTo('/my-film')}>
                 <div className="d-flex align-items-center">
-                  <img src="/raise-fund.svg" alt="fund" height="20px" className="mr-2" />
-                  <b>Raise Fund</b>
+                  <img src="/clapperboard.svg" alt="fund" height="20px" className="mr-2" />
+                  <b>My List Film</b>
                 </div>
               </NavDropdown.Item>
               <NavDropdown.Divider />

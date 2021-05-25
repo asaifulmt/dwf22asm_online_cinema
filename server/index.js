@@ -1,8 +1,14 @@
 const express = require('express')
+const cors = require('cors')
+const router = require('./routers')
 
 const app = express()
 const port = 5000
 
+app.use(cors())
+app.use(express.json())
+
 app.get('/', (_, res) => res.send('Server up!'))
+app.use('/api/v1', router)
 
 app.listen(port, () => console.log(`Server listening to http://localhost:${port}`))

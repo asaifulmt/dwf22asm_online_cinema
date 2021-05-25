@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Product Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2)
+    format("woff2");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+body {
+  font-family: Product Sans;
+}
+
 :root {
   --primary-color: #cd2e71;
   --white-color: #e8e8e8;
@@ -52,4 +66,51 @@
   width: 100px;
   height: 40px;
   font-weight: 900;
+}
+
+.container-modal {
+  padding: 33px;
+}
+
+.title-modal {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 44px;
+  margin-bottom: 34px;
+}
+
+.footer-modal {
+  margin-top: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-modal,
+.btn-modal:hover,
+.btn-modal:active {
+  background-color: var(--bg-color);
+  border-color: var(--bg-color);
+  margin-top: 30px;
+  color: var(--primary-color);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.dropdown-menu {
+  background-color: var(--bg-color);
+}
+
+.dropdown-item b {
+  color: var(--white-color);
+}
+
+.dropdown-item:hover b {
+  color: var(--bg-color);
 }
