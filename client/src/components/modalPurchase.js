@@ -49,7 +49,7 @@ const ModalPurchase = ({ isVisible, onHide, filmId, title }) => {
     } catch(err) {
       console.log(err)
       setStatus({
-        message: err.response && err.response.data.message || 'Something went wrong with the server, please try again later',
+        message: err.response && (err.response.data.message || 'Something went wrong with the server, please try again later'),
         error: true
       })
     }

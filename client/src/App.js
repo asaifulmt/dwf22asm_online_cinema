@@ -12,6 +12,7 @@ import PrivateRoute from "./components/privateRoute";
 import AdminRoute from "./components/adminRoute";
 import AddFilm from "./pages/addFilm";
 import DetailFilm from "./pages/detailFilm";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <PrivateRoute exact path="/film/:id" component={DetailFilm} />
+        <PrivateRoute exact path="/profile" component={Profile} />
         <AdminRoute exact path="/add-film" component={AddFilm} />
 
         <Route component={NotFound} />

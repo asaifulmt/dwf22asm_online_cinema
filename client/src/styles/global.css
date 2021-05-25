@@ -18,6 +18,10 @@ body {
   --bg-color: #000;
 }
 
+.primary-color {
+  color: var(--primary-color);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -138,4 +142,21 @@ body {
   color: var(--white-color);
   width: 159px;
   height: 45px;
+}
+
+.alert-container {
+  padding: 3px 39px;
+  background: rgba(0, 255, 133, 0.1);
+  border-radius: 2px;
+  margin: 0;
+}
+
+.alert-text {
+  color: #00ff47;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 14px;
+  opacity: 1;
+  margin: 0;
 }
