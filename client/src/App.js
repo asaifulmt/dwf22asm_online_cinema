@@ -10,6 +10,7 @@ import ModalLogin from "./components/modalLogin";
 import ModalRegister from "./components/modalRegister";
 import AdminRoute from "./components/adminRoute";
 import AddFilm from "./pages/addFilm";
+import DetailFilm from "./pages/detailFilm";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/film/:id" component={DetailFilm} />
         <AdminRoute exact path="/add-film" component={AddFilm} />
 
         <Route component={NotFound} />

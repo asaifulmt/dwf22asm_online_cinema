@@ -10,5 +10,6 @@ app.use(express.json())
 
 app.get('/', (_, res) => res.send('Server up!'))
 app.use('/api/v1', router)
+app.use('/uploads', express.static('uploads'))
 
 app.listen(port, () => console.log(`Server listening to http://localhost:${port}`))

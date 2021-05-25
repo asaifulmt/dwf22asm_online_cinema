@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { API } from "../config/api";
 
 export default function AddFilm() {

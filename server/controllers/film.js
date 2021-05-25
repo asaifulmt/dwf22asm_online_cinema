@@ -59,3 +59,24 @@ exports.createFilm = async (req, res) => {
     })
   }
 }
+
+exports.getFilmById = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const film = await models.film.findOne({ where: { id }, include: {
+      model: models.category,
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    } })
+
+    res.status(200).send({ film })
+  } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}
