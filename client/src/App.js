@@ -8,13 +8,16 @@ import NotFound from "./pages/notFound";
 import Navbar from "./components/navbar";
 import ModalLogin from "./components/modalLogin";
 import ModalRegister from "./components/modalRegister";
+import AdminRoute from "./components/adminRoute";
+import AddFilm from "./pages/addFilm";
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path="/" component={Home} />
+        <AdminRoute exact path="/add-film" component={AddFilm} />
 
         <Route component={NotFound} />
       </Switch>
