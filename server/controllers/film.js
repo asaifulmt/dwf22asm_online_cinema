@@ -64,14 +64,29 @@ exports.getFilmById = async (req, res) => {
   try {
     const { id } = req.params
 
-    const film = await models.film.findOne({ where: { id }, include: {
+    const film = await models.film.findOne({ where: { id }, include: [{
       model: models.category,
       attributes: {
         exclude: ['createdAt', 'updatedAt']
       }
-    } })
+    }, {
+      model: models.user,
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt', 'role']
+      },
+      through: {
+        model: models.userFilm
+      }
+    }] })
 
-    res.status(200).send({ film })
+    const user = film.users.find(user => user.id === req.userId)
+
+    const userFilm = JSON.parse(JSON.stringify(film))
+    delete userFilm.users
+
+    userFilm.userFilm = user && user.userFilm || {}
+
+    res.status(200).send({ film: userFilm })
   } catch(err) {
     console.log(err)
     res.status(500).send({
