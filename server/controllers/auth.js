@@ -48,7 +48,10 @@ exports.register = async (req, res) => {
     const token = jwt.sign({
       id: dataUser.id,
       fullName: dataUser.fullName,
-      email: dataUser.email
+      phone: dataUser.phone,
+      avatar: dataUser.avatar,
+      email: dataUser.email,
+      role: dataUser.role
     }, secretKey)
 
     res.status(200).send({
@@ -107,7 +110,10 @@ exports.login = async (req, res) => {
     const token = jwt.sign({
       id: checkEmail.id,
       fullName: checkEmail.fullName,
-      email: checkEmail.email
+      email: checkEmail.email,
+      phone: checkEmail.phone,
+      avatar: checkEmail.avatar,
+      role: checkEmail.role
     }, secretKey)
 
     res.status(200).send({

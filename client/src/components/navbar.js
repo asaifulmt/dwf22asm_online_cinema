@@ -5,7 +5,7 @@ import { ModalContext } from "../contexts/modalContext";
 import { UserContext } from "../contexts/userContext";
 
 const NavbarComponent = () => {
-  const [{ isLogin }, dispatchUser] = useContext(UserContext);
+  const [{ isLogin, userData }, dispatchUser] = useContext(UserContext);
   const [, dispatch] = useContext(ModalContext);
   const router = useHistory();
 
@@ -28,18 +28,33 @@ const NavbarComponent = () => {
         {
           isLogin ? (
             <NavDropdown title={(<img src="/profile.svg" alt="profile" />)}>
-              <NavDropdown.Item onClick={() => goTo('/profile')}>
-                <div className="d-flex align-items-center">
-                  <img src="/user.svg" alt="user" height="20px" className="mr-2" />
-                  <b>Profile</b>
-                </div>
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => goTo('/my-film')}>
-                <div className="d-flex align-items-center">
-                  <img src="/clapperboard.svg" alt="fund" height="20px" className="mr-2" />
-                  <b>My List Film</b>
-                </div>
-              </NavDropdown.Item>
+              {
+                userData && userData.role === 'admin'
+                  ? (
+                    <NavDropdown.Item onClick={() => goTo('/add-film')}>
+                        <div className="d-flex align-items-center">
+                        <img src="/clapperboard.svg" alt="fund" height="20px" className="mr-2" />
+                        <b>Add Film</b>
+                      </div>
+                    </NavDropdown.Item>
+                  )
+                  : (
+                    <>
+                      <NavDropdown.Item onClick={() => goTo('/profile')}>
+                        <div className="d-flex align-items-center">
+                          <img src="/user.svg" alt="user" height="20px" className="mr-2" />
+                          <b>Profile</b>
+                        </div>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item onClick={() => goTo('/my-film')}>
+                        <div className="d-flex align-items-center">
+                          <img src="/clapperboard.svg" alt="fund" height="20px" className="mr-2" />
+                          <b>My List Film</b>
+                        </div>
+                      </NavDropdown.Item>
+                    </>
+                  )
+              }
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={logout}>
                 <div className="d-flex align-items-center">

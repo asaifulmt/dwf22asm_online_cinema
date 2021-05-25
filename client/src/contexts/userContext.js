@@ -1,17 +1,21 @@
 import { createContext, useReducer } from "react";
-// import { setAuthToken } from "../config/api";
+import jwt from 'jsonwebtoken'
+import { setAuthToken } from "../config/api";
 
 export const UserContext = createContext();
 
 const token = localStorage.getItem('token')
+const userData = null
 
 const initialState = {
-  isLogin: token ? true : false
+  isLogin: token ? true : false,
+  userData
 }
 
-// if (token) {
-//   setAuthToken(token)
-// }
+if (token) {
+  setAuthToken(token)
+  initialState.userData = jwt.decode(token)
+}
 
 const reducer = (state, action) => {
   const { type, payload } = action;
@@ -22,12 +26,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLogin: true,
+        userData: jwt.decode(payload.token)
       };
     case "LOGOUT":
       localStorage.removeItem('token')
       return {
         ...state,
-        isLogin: false
+        isLogin: false,
+        userData: null
       };
     default:
       throw new Error();
