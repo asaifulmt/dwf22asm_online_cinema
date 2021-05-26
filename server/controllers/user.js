@@ -34,3 +34,32 @@ exports.getProfile = async (req, res) => {
     })
   }
 }
+
+exports.getMyFilm = async (req, res) => {
+  try {
+    const { userId } = req
+
+    const user = await models.user.findOne({
+      where: {
+        id: userId
+      },
+      attributes: [],
+      include: {
+        model: models.film,
+        attributes: ['id', 'title', 'thumbnail'],
+      }
+    })
+
+    res.status(200).send({
+      status: 'success',
+      myFilms: user.films
+    })
+
+  } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}

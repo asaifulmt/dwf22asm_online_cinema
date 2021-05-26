@@ -60,6 +60,21 @@ exports.createFilm = async (req, res) => {
   }
 }
 
+exports.getAllFilms = async (req, res) => {
+  try {
+    const films = await models.film.findAll({
+      attributes: ['id', 'title', 'thumbnail']
+    })
+    res.status(200).send({ films })
+  } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}
+
 exports.getFilmById = async (req, res) => {
   try {
     const { id } = req.params

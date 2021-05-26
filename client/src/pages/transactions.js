@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table, Container, DropdownButton, Dropdown, Alert } from "react-bootstrap";
 import { API } from "../config/api";
-import { convertToRupiah } from "../utils/helper";
 import NotFound from "./notFound";
 
 export default function Transactions() {
@@ -30,7 +29,7 @@ export default function Transactions() {
 
   async function updateStatus(id, status) {
     try {
-      const resp = await API.patch(`/transaction/${id}`, { status })
+      await API.patch(`/transaction/${id}`, { status })
       setMsg({ error: false, text: 'Transaction status update successfully' })
     } catch(err) {
       setMsg({ error: true, text: 'Something wrong with the server, please try again' })
