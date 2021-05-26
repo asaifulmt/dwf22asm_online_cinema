@@ -55,3 +55,47 @@ exports.buyFilm = async (req, res) => {
     })
   }
 }
+
+
+exports.getTransactions = async (req, res) => {
+  try {
+    const transactions = await models.userFilm.findAll({
+      attributes: ['id', 'status', 'accountNumber', 'transferProof', 'orderDate'],
+      include: [
+        {
+          model: models.user,
+          attributes: {
+            exclude: ['password', 'role', 'createdAt', 'updatedAt']
+          }
+        },
+        models.film
+      ]
+    })
+
+    res.status(200).send({ transactions })
+  } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}
+
+exports.updateStatusTransaction = async (req, res) => {
+  try {
+    await models.userFilm.update({
+      status: req.body.status
+    }, {
+      where: { id: req.params.id }
+    })
+
+    res.status(200).send({ status: 'success' })
+  } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}

@@ -111,6 +111,7 @@ body {
   background-color: var(--bg-color);
 }
 
+.dropdown-item,
 .dropdown-item b {
   color: var(--white-color);
 }

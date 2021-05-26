@@ -13,6 +13,7 @@ import AdminRoute from "./components/adminRoute";
 import AddFilm from "./pages/addFilm";
 import DetailFilm from "./pages/detailFilm";
 import Profile from "./pages/profile";
+import Transactions from "./pages/transactions";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <PrivateRoute exact path="/film/:id" component={DetailFilm} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <AdminRoute exact path="/add-film" component={AddFilm} />
+        <AdminRoute exact path="/transactions" component={Transactions} />
 
         <Route component={NotFound} />
       </Switch>

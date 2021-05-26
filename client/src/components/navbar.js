@@ -31,12 +31,20 @@ const NavbarComponent = () => {
               {
                 userData && userData.role === 'admin'
                   ? (
-                    <NavDropdown.Item onClick={() => goTo('/add-film')}>
+                    <>
+                      <NavDropdown.Item onClick={() => goTo('/add-film')}>
+                          <div className="d-flex align-items-center">
+                          <img src="/clapperboard.svg" alt="add-film" height="20px" className="mr-2" />
+                          <b>Add Film</b>
+                        </div>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item onClick={() => goTo('/transactions')}>
                         <div className="d-flex align-items-center">
-                        <img src="/clapperboard.svg" alt="fund" height="20px" className="mr-2" />
-                        <b>Add Film</b>
+                        <img src="/transaction.svg" alt="transactions" height="20px" className="mr-2 primary-color" />
+                        <b>Transactions</b>
                       </div>
                     </NavDropdown.Item>
+                  </>
                   )
                   : (
                     <>

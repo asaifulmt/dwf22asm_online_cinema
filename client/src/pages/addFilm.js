@@ -88,6 +88,7 @@ export default function AddFilm() {
 
   return (
     <Container className="mt-5">
+      <h1 className="mb-4">Add Film</h1>
       {
         status.message && <Alert variant={status.error ? 'danger' : 'primary'}>{status.message}</Alert>
       }
