@@ -6,6 +6,8 @@ exports.buyFilm = async (req, res) => {
   try {
     const { userId, files, body, params } = req
 
+    const filmId = Number(params.id)
+
     if (!files.transferProof) {
       return res.status(400).send({
         status: 'failed',
@@ -13,7 +15,11 @@ exports.buyFilm = async (req, res) => {
       })
     }
 
-    const user = await models.userFilm.findOne({ userId })
+    const user = await models.userFilm.findOne({
+      where: { userId, filmId }
+    })
+
+    console.log(user)
 
     if (user && (user.status === 'pending' || user.status === 'approved')) {
       return res.status(400).send({
@@ -42,7 +48,7 @@ exports.buyFilm = async (req, res) => {
       status: 'pending',
       transferProof,
       userId,
-      filmId: Number(params.id),
+      filmId,
       orderDate: moment().format('dddd, DD MMMM yyyy')
     })
 

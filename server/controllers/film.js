@@ -63,7 +63,11 @@ exports.createFilm = async (req, res) => {
 exports.getAllFilms = async (req, res) => {
   try {
     const films = await models.film.findAll({
-      attributes: ['id', 'title', 'thumbnail']
+      attributes: ['id', 'title', 'thumbnail', 'description', 'price'],
+      include: {
+        model: models.category,
+        attributes: ['name']
+      }
     })
     res.status(200).send({ films })
   } catch(err) {
@@ -103,6 +107,90 @@ exports.getFilmById = async (req, res) => {
 
     res.status(200).send({ film: userFilm })
   } catch(err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}
+
+exports.editFilm = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const updateFilm = await models.film.findOne({
+      where: {
+        id
+      }
+    })
+
+    if(!updateFilm) {
+      return res.status(404).send({
+        status: 'failed',
+        message: 'update film not found'
+      })
+    }
+
+    const data = req.body
+
+    if (req.files.thumbnail) {
+      data.thumbnail = req.files.thumbnail[0].filename
+    }
+
+    await models.film.update(data, {
+      where: {
+        id: updateFilm.id
+      }
+    })
+
+    res.status(200).send({
+      status: 'Update Success',
+      film: {
+        id
+      }
+    })
+
+  } catch (err) {
+    console.log(err)
+    res.status(500).send({
+      status: 'failed',
+      message: 'server error'
+    })
+  }
+}
+
+exports.deleteFilm = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const filmSelected = await models.film.findOne({
+      where: {
+        id
+      }
+    })
+
+    if(!filmSelected) {
+      return res.status(404).send({
+        status: "failed",
+        message: "film doesn't exist"
+      })
+    }
+
+    await models.film.destroy({
+      where: {
+        id
+      }
+    })
+
+    res.status(200).send({
+      status: 'success',
+      film: {
+        id
+      }
+    })
+    
+  } catch (err) {
     console.log(err)
     res.status(500).send({
       status: 'failed',

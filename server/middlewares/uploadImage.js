@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 })
 
 const uploadImage = multer({ storage }).fields([
+  { name: 'avatar', maxCount: 1},
   { name: 'thumbnail', maxCount: 1 },
   { name: 'transferProof', maxCount: 1 }
 ])

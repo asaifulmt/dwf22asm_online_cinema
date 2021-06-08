@@ -10,6 +10,13 @@
 
 body {
   font-family: Product Sans;
+  background: var(--bg-color);
+  color: #fff;
+}
+
+th,
+td {
+  color: #fff;
 }
 
 :root {
@@ -24,6 +31,37 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: var(--primary-color);
+}
+
+.container-list-film {
+  width: 70%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.highlight-film {
+  width: 1081px;
+  height: 437px;
+  padding: 40px 80px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.btn-add-film {
+  width: 230px;
+  height: 40px;
+}
+
+.card-profile {
+  background: #5a1432;
 }
 
 .navbar {
@@ -97,10 +135,10 @@ body {
 .btn-modal,
 .btn-modal:hover,
 .btn-modal:active {
-  background-color: var(--bg-color);
-  border-color: var(--bg-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
   margin-top: 30px;
-  color: var(--primary-color);
+  color: #fff;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -126,11 +164,43 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 50;
-  background: #000;
+  /* z-index: 9999; */
+  /* background: #000; */
   pointer-events: none;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  width: 640px;
+  height: 360px;
+  /* top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; */
+  /* z-index: 99999; */
+  background: #000;
+  opacity: 0;
+  /* color: #fff; */
+}
+
+.toast-buy-film {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #469f74;
+  font-size: 18px;
+  width: 100%;
+}
+
+.modal-content {
+  background: var(--bg-color);
+}
+
+.title-modal {
+  color: var(--primary-color);
 }
 
 .btn.btn-attachment,
@@ -160,4 +230,11 @@ body {
   line-height: 14px;
   opacity: 1;
   margin: 0;
+}
+
+.form-input {
+  background: rgba(210, 210, 210, 0.25);
+  border: 2px solid #bcbcbc;
+  box-sizing: border-box;
+  border-radius: 5px;
 }

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { API } from "../config/api";
 
-export default function AddFilm() {
+export default function EditFilm() {
   const [formData, setFormData] = useState({
     title: '',
     thumbnail: null,
@@ -16,6 +16,7 @@ export default function AddFilm() {
 
   const [categories, setCategories] = useState([])
 
+  const { id } = useParams()
   const router = useHistory()
 
   const [status, setStatus] = useState({})
@@ -43,7 +44,27 @@ export default function AddFilm() {
       }
     }
 
+    const getFilm = async () => {
+      try {
+        const resp = await API.get(`/film/${id}`)
+        const { film } = resp.data
+        setFormData({
+          title: film.title,
+          price: film.price,
+          description: film.description,
+          filmUrl: film.filmUrl,
+          categoryId: film.categoryId,
+        })
+      } catch(err) {
+        setStatus({
+          message: 'Can\'t get film data',
+          error: true
+        })
+      }
+    }
+
     getCategories()
+    getFilm()
   }, [])
 
   const handleCreateFilm = async (e) => {
@@ -59,16 +80,16 @@ export default function AddFilm() {
 
       const form = new FormData()
       form.set('title', formData.title)
-      form.append('thumbnail', formData.thumbnail[0], formData.thumbnail[0].name)
+      if (formData.thumbnail) form.append('thumbnail', formData.thumbnail[0], formData.thumbnail[0].name)
       form.set('price', formData.price)
       form.set('filmUrl', formData.filmUrl)
       form.set('categoryId', formData.categoryId)
       form.set('description', formData.description)
 
-      const resp = await API.post('/film', form, config)
+      const resp = await API.patch(`/film/${id}`, form, config)
 
       setStatus({
-        message: 'Your film is successfully added',
+        message: 'Your film is successfully updated',
         error: false
       })
 
@@ -88,7 +109,7 @@ export default function AddFilm() {
 
   return (
     <Container className="mt-5">
-      <h1 className="mb-4">Add Film</h1>
+      <h1 className="mb-4">Edit Film</h1>
       {
         status.message && <Alert variant={status.error ? 'danger' : 'primary'}>{status.message}</Alert>
       }
@@ -96,11 +117,11 @@ export default function AddFilm() {
         <div className="d-flex align-items-center">
           <Form.Group className="flex-grow-1 mr-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" name="title" placeholder="title" onChange={onChange} />
+            <Form.Control type="text" name="title" value={formData.title} onChange={onChange} />
           </Form.Group>
           <Form.Group onClick={() => hiddenFileInput.current.click()}>
             <Form.Label>Thumbnail</Form.Label>
-            <Form.Control type="text" placeholder="Attach Thumbnail" img src="/frame1.svg" disabled value={formData.thumbnail && formData.thumbnail[0] ? formData.thumbnail[0].name : ''} className="cursor-pointer" />
+            <Form.Control type="text" disabled value={formData.thumbnail && formData.thumbnail[0] ? formData.thumbnail[0].name : ''} className="cursor-pointer" />
           </Form.Group>
           <Form.Group>
             <Form.File ref={hiddenFileInput} label="Thumbnail" name="thumbnail" onChange={onChange} style={{ display: "none" }} />
@@ -108,7 +129,7 @@ export default function AddFilm() {
         </div>
         <Form.Group>
           <Form.Label>Category</Form.Label>
-          <Form.Control as="select" custom name="categoryId" onChange={onChange}>
+          <Form.Control as="select" value={formData.categoryId} custom name="categoryId" onChange={onChange}>
             {
               categories.map(category => (
                 <option value={category.id} key={category.id}>{category.name}</option>
@@ -118,18 +139,18 @@ export default function AddFilm() {
         </Form.Group>
         <Form.Group>
           <Form.Label>Price</Form.Label>
-          <Form.Control type="text" name="price" onChange={onChange} />
+          <Form.Control type="text" value={formData.price} name="price" onChange={onChange} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Link Film</Form.Label>
-          <Form.Control type="text" name="filmUrl" onChange={onChange} />
+          <Form.Control type="text" name="filmUrl" value={formData.filmUrl} onChange={onChange} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" onChange={onChange} />
+          <Form.Control as="textarea" rows={3} value={formData.description} name="description" onChange={onChange} />
         </Form.Group>
         <div className="d-flex flex-row-reverse">
-          <Button className="mt-4 btn-add-film" onClick={handleCreateFilm}>Add Film</Button>
+          <Button className="mt-4 btn-add-film" onClick={handleCreateFilm}>Update Film</Button>
         </div>
       </Form>
     </Container>

@@ -54,8 +54,8 @@ export default function Profile() {
           <h1 className="mb-4">History Transaction</h1>
           {
             profile.films && profile.films.map(film => (
-              <Card key={film.id} style={{ width: '419px', height: 'auto' }}>
-                <Card.Body>
+              <Card key={film.id} style={{ width: '419px', height: 'auto', marginBottom: '1rem', borderColor: '#5a1432' }}>
+                <Card.Body className="card-profile">
                   <div className="d-flex flex-column justify-content-between">
                     <b>{film.title}</b>
                     <i>{film.userFilm.orderDate}</i>

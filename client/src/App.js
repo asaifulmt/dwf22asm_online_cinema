@@ -15,6 +15,7 @@ import DetailFilm from "./pages/detailFilm";
 import Profile from "./pages/profile";
 import Transactions from "./pages/transactions";
 import MyFilm from "./pages/myFilm";
+import EditFilm from "./pages/editFilm";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <PrivateRoute exact path="/my-film" component={MyFilm} />
         <AdminRoute exact path="/add-film" component={AddFilm} />
         <AdminRoute exact path="/transactions" component={Transactions} />
+        <AdminRoute exact path="/edit-film/:id" component={EditFilm} />
 
         <Route component={NotFound} />
       </Switch>
